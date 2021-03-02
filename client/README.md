@@ -3,7 +3,6 @@ A [React]() based website supported by [Vite](https://vitejs.dev).
 ## Setup
 
 ```bash
-cd client
 npm install
 
 # For local development
