@@ -2,7 +2,7 @@ This repo hosts the code for the Steak N Eggs website
 
 The project is split in two directories (Only one exists right now)
 * ***client*** - Houses the web application that interfaces with the backend code running elsewhere.
-* *backend* - Houses the code for the API and database.
+* ~~*backend* - Houses the code for the API and database.~~
 
 ## Setup
 
