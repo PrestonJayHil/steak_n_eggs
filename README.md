@@ -12,6 +12,7 @@ Currently there is no database/API so setup only involves the client.
 
 2. client
 ```bash
+cd steak_n_eggs
 cd client
 npm install
 
