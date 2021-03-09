@@ -1,8 +1,11 @@
 A [React]() based website supported by [Vite](https://vitejs.dev).
 
+<hr />
+
 ## Setup
 
 ```bash
+# Install all the client dependencies
 npm install
 
 # For local development
@@ -14,6 +17,8 @@ npm run dev
 npm run build
 ```
 
+<hr />
+
 ## Features
 
 ```
@@ -22,7 +27,7 @@ Note that by default, Vite only handles syntax transforms and does not cover pol
 See: https://vitejs.dev/guide/build.html#browser-compatibility
 
 
-**CSS Nesting** - enabled by [postcss-nesting](https://github.com/csstools/postcss-nesting).
+### **CSS Nesting** - enabled by [postcss-nesting](https://github.com/csstools/postcss-nesting).
 
 ```pcss
 a, b {
