@@ -1,10 +1,14 @@
 code style documentation: 
+=============================================================
+UPDATE CODING STYLE AND DESIGN PATTERNS AS WE WORK ON PROJ
+=============================================================
 
 variables:
 
     camelCase = 0;
     float a, b, c, d, e;
-
+    expression : x += y;
+	
 Conditionals:
 
     for (int 0 =1; i < 10; i++) 
@@ -16,8 +20,24 @@ Conditionals:
     {
 
     }
+    while (true)
+    {
+
+
+    }
+
+    switch (x)
+    {
+
+    
+    }
+
 
 Functions: 
 
-    camel_case_func_names () {}
+    camel_case_func_names () 
+    { 
+    
+
+    }
 
