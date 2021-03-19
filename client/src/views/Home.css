@@ -1,42 +1,42 @@
-.Home {
+.Home-header 
+{
+  background-color: #dbb378;
+  min-height: 200hv;
+  display: block;
   text-align: center;
+  font-size: 15px;
+  color: rgb(241, 232, 232);
+  border-bottom: 4px solid transparent;
+  padding: 20px 20px;
+  text-decoration: none;
+  width: 100;
 }
 
-.Home-logo {
-  height: 40vmin;
-  pointer-events: none;
+
+.Home-header a 
+{
+  float: center;
+  color: #ffffff;
+  text-align: center;
+  padding: 20px 20px;
+  text-decoration: none;
+  font-size: 16px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .Home-logo {
-    animation: Home-logo-spin infinite 20s linear;
-  }
+.Home-header a:hover 
+{
+  background-color: rgb(204, 154, 15);
+  color: rgb(255, 255, 255);
+  border-radius: 15px;
+  
 }
 
-.Home-header {
-  background-color: #266b62;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: grey;
+.Home-header > a {
+  position: relative;
+  color: hsl(0, 0%, 100%);
+  text-decoration: none;
 }
 
-.Home-link {
-  color: #61dafb;
-}
-
-@keyframes Home-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-button {
-  font-size: calc(10px + 2vmin);
+.Home-header > a:hover {
+  color: rgb(248, 246, 246);
 }
