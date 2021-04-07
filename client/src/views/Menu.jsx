@@ -1,16 +1,21 @@
 import React, { useState } from 'react'
-// import logo from '../assets/svg/logo.svg'
+import file from '../assets/pdf/menu.pdf'
 import './Styles.css'
 
 function Menu() {
   const [count, setCount] = useState(0)
 
   return (
-  <div>
-    <h2>Menu Page</h2>
+    <div>
+    <iframe
+            style={{ width: "563px", height: "666px" }}
+            src={file}
+            type='menu.pdf'
+            title='title'
+          />
   </div>
   )
-
+  
 
 
 }
