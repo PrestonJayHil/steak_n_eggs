@@ -71,3 +71,12 @@ a.active:hover:before {
   padding: 12px 10px;
 }
 
+iframe {
+  display: block;
+  margin: auto;
+  top: 50px;
+  padding-top: 50px;
+  padding-bottom: 6px;
+  padding-right: 110px;
+  
+}
