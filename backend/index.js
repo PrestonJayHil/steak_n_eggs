@@ -35,6 +35,46 @@ const sequelize = new Sequelize({
     }
 })();
 
+app.get('/menus', async (req, res) => {
+    dbDebug('/menus');
+    let menus;
+    try {
+        menus = await sequelize.query(
+            'SELECT * FROM menu',
+            {
+                raw: true,
+                type: QueryTypes.SELECT
+            }
+        );
+    } catch (_) {
+        return res.sendStatus(500);
+    }
+
+    const menuWithItems = await Promise.all(Array.from(menus, (menu) => {
+        return sequelize.query(
+            `select
+                itm.item_id,
+                itm.item_title,
+                itm.item_desc,
+                itm.item_price,
+                itm.category_name
+            from ((menu_items join item using(item_id)) mi
+                join item_category ic on mi.item_category = ic.category_id) itm
+            where menu_id = ?`,
+            {
+                raw: true,
+                type: QueryTypes.SELECT,
+                replacements: [menu.menu_id],
+            }
+        ).then((items) => ({
+            ...menu,
+            items,
+        })).catch((_) => ({}));
+    }));
+
+    return res.status(200).json(menuWithItems);
+});
+
 app.get('/menu', async (req, res) => {
     dbDebug('/menu');
     let curMenu;
