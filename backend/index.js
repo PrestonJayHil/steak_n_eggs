@@ -75,26 +75,24 @@ app.get('/menus', async (req, res) => {
     return res.status(200).json(menuWithItems);
 });
 
-app.get('/menu', async (req, res) => {
-    dbDebug('/menu');
-    let curMenu;
+app.get('/menus/:id', async ({ params: { id } }, res) => {
+    dbDebug(`/menus/${id}`);
+    let selectedMenu;
     try {
-        [curMenu] = await sequelize.query(
-            'SELECT * FROM menu WHERE ? between menu_start_time AND menu_end_time',
+        [selectedMenu] = await sequelize.query(
+            'SELECT * FROM menu WHERE menu_id = ?',
             {
                 raw: true,
                 type: QueryTypes.SELECT,
-                replacements: [new Date().toLocaleTimeString()],
+                replacements: [id],
             },
         );
     } catch (_) {
-        return res.sendStatus(500);
+        //
     }
 
-    if (!curMenu) {
-        return res.status(200).json({
-            menu_id: null,
-        });
+    if (!selectedMenu) {
+        return res.sendStatus(404);
     }
 
     try {
@@ -111,11 +109,11 @@ app.get('/menu', async (req, res) => {
             {
                 raw: true,
                 type: QueryTypes.SELECT,
-                replacements: [curMenu.menu_id],
+                replacements: [selectedMenu.menu_id],
             },
         );
         return res.status(200).json({
-            ...curMenu,
+            ...selectedMenu,
             items,
         });
     } catch (_) {
