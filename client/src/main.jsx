@@ -37,7 +37,7 @@ ReactDOM.render(
       </div>
 
     <div className="Body">
-      <h1>Welcome to our restaurant!</h1>
+      <h2>Welcome to our restaurant!</h2>
       </div> 
 
     </BrowserRouter>
