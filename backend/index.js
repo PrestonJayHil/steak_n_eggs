@@ -42,12 +42,19 @@ app.get('/menu', async (req, res) => {
         [curMenu] = await sequelize.query(
             'SELECT * FROM menu WHERE ? between menu_start_time AND menu_end_time',
             {
+                raw: true,
                 type: QueryTypes.SELECT,
                 replacements: [new Date().toLocaleTimeString()],
             },
         );
     } catch (_) {
         return res.sendStatus(500);
+    }
+
+    if (!curMenu) {
+        return res.status(200).json({
+            menu_id: null,
+        });
     }
 
     try {
@@ -62,6 +69,7 @@ app.get('/menu', async (req, res) => {
                 join item_category ic on mi.item_category = ic.category_id) itm
             where menu_id = ?`,
             {
+                raw: true,
                 type: QueryTypes.SELECT,
                 replacements: [curMenu.menu_id],
             },
