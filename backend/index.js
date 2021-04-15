@@ -7,10 +7,12 @@ const debug = require('debug');
 const httpDebug = debug('sne:http');
 const dbDebug = debug('sne:db');
 const { Sequelize, QueryTypes } = require('sequelize');
+const cors = require('cors');
 
 const app = express();
 const httpServer = require('http').createServer(app);
 
+app.use(cors());
 app.use(helmet());
 app.use(express.json());
 
