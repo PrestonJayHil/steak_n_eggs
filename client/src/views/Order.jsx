@@ -4,13 +4,35 @@ import React, { useEffect, useState } from 'react'
 import MenuItem from '../components/MenuItem.jsx';
 import './Styles.css'
 
+
+
 function Order() {
+
+
+
   const [count, setCount] = useState(0)
 
   const [menus, setMenu] = useState([]);
   const [items, setItems] = useState({});
   const [selectedMenuId, setSelectedMenuId] = useState('');
   const [loading, setLoading] = useState(menus.length === 0);
+
+
+
+  const checkoutList = JSON.parse(localStorage.getItem("checkoutItems"))  || []
+  const [checkoutItems, setCheckoutItems] = useState(checkoutList)
+console.log(checkoutItems, "<===== checkout")
+
+useEffect(() => {
+  localStorage.setItem("checkoutItems", JSON.stringify(checkoutItems));     
+}, [checkoutItems])
+
+
+  const handleCheckout = (item) => {
+       setCheckoutItems(old => [...old, item]) 
+       localStorage.setItem("checkoutItems", JSON.stringify(checkoutItems));
+       alert(`${item.item_title} added to chekout`)
+  }
 
   useEffect(() => {
     setLoading(true);
@@ -58,6 +80,7 @@ function Order() {
             value={menu.menu_id}
           >
             {menu.menu_title}
+
           </option>
         ))
       }
@@ -67,6 +90,7 @@ function Order() {
         items[selectedMenuId].map((item) => (
           <li key={item.item_id}>
             <MenuItem item={item} />
+            <button onClick={() => handleCheckout(item)}> checkout</button>
           </li>
         ))
       }
