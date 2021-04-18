@@ -80,3 +80,13 @@ iframe {
   padding-right: 110px;
   
 }
+
+.center {
+  text-align: center;
+  display: block;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  padding-top: 35px;
+  padding-right: 100px;
+}
