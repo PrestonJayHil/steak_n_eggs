@@ -80,7 +80,6 @@ useEffect(() => {
             value={menu.menu_id}
           >
             {menu.menu_title}
-            
 
           </option>
         ))
