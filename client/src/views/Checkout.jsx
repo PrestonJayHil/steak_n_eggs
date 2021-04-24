@@ -9,6 +9,12 @@ function Checkout() {
   
 console.log(checkoutList)
 
+// const handleRemove = (item) => {
+//   setCheckoutItems(old => [...old, item]) 
+//   localStorage.setItem("checkoutItems", JSON.stringify(checkoutItems));
+//   alert(`${item.item_title} added to chekout`)
+// }
+
 if(checkoutList.length < 1){
   return <h2>No checkouts available</h2>
 }
@@ -21,7 +27,7 @@ else{
         <div>
               <p>Title: {item.item_title}</p>
               <p>{item.item_price}</p>           
-              <button>remove from cart</button>
+              <button onClick={() => handleRemove(item)}>Remove from cart</button>
           </div>
       ))
     }
