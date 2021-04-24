@@ -5,7 +5,6 @@ import './Styles.css'
 function Checkout() {
 
   const checkoutList = JSON.parse(localStorage.getItem("checkoutItems")) || []
-
   const [count, setCount] = useState(0)
   
 console.log(checkoutList)

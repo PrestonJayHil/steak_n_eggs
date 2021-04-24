@@ -69,8 +69,8 @@ useEffect(() => {
   }
 
   return (
-  <div>
-    <h2>Order-online Page</h2>
+  <div className="menu-header">
+    <h2>Order Online! Pick up in-store!</h2>
     <select onChange={({ target: { value }}) => { setSelectedMenuId(value); }}>
       {
         menus.map((menu) => (
@@ -80,17 +80,19 @@ useEffect(() => {
             value={menu.menu_id}
           >
             {menu.menu_title}
+            
 
           </option>
         ))
       }
     </select>
-    <ul>
+    <ul class="menu-items">
+      
       {
         items[selectedMenuId].map((item) => (
           <li key={item.item_id}>
             <MenuItem item={item} />
-            <button onClick={() => handleCheckout(item)}> checkout</button>
+            <button onClick={() => handleCheckout(item)}> Add to cart</button>
           </li>
         ))
       }

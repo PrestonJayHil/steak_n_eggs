@@ -8,26 +8,12 @@ import menu from '../assets/jpeg/menu.jpg'
 
 function Menu() {
   const [count, setCount] = useState(0)
-
   return (
-  
-  
- 
-
     <div>
       <img src={menu} alt="" width="950px" height="1400px" class="center"/>
     </div>
-  
-   
-
-  
-  
   )
-
-
-
 }
-
 export default Menu
 
 

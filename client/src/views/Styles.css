@@ -90,3 +90,18 @@ iframe {
   padding-top: 35px;
   padding-right: 100px;
 }
+
+.menu-header {
+  padding-top: 20px;
+  padding-left: 50px;
+}
+
+
+li {
+  padding: 80px;
+}
+
+ul.menu-items {
+  list-style-type: none;
+  padding-left: 0px;
+}
