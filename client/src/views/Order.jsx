@@ -47,7 +47,7 @@ useEffect(() => {
             menu_title: menuWithItems.menu_title,
             menu_start_time: menuWithItems.menu_start_time,
             menu_end_time: menuWithItems.menu_end_time,
-          };
+          }; 
           const { items } = menuWithItems;
           setMenu((prev) => [...prev, menu]);
           setItems((prev) => ({
@@ -86,7 +86,6 @@ useEffect(() => {
       }
     </select>
     <ul class="menu-items">
-      
       {
         items[selectedMenuId].map((item) => (
           <li key={item.item_id}>

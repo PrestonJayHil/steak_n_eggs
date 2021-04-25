@@ -1,4 +1,6 @@
 import React, {useState} from 'react'
+import FrenchToastCombo from '../assets/menu_assets/french_toast_combo.jpg'
+import SteakNEggs from '../assets/menu_assets/steak_n_eggs.jpg'
 
 
 
@@ -14,3 +16,20 @@ export default function MenuItem({ item }) {
 
     )
 }
+
+
+
+
+    
+  /*  items.forEach((item) => {
+        filepath = name_normalize_function(item.item_title);
+        return (<img src={filepath} />);
+      })
+
+        const firstItem = items[0]
+        const filepath = name_normalize_function(firstItem.item_title);
+        return (<img src={filepath} />);
+
+    */
+
+    
