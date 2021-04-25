@@ -106,3 +106,41 @@ ul.menu-items {
   padding-left: 0px;
   padding-bottom: 10px;
 }
+
+.right-align 
+{
+  position: relative;
+  float: right;
+}
+
+.cart-style
+{
+  
+  width: 200px;
+  padding-top: 0px;
+  
+  
+  
+}
+
+.cart-header
+{
+  padding-top: 50px;
+  float: center;
+  display: flex;
+  
+  
+}
+
+.cart-header-border2
+{
+  padding-top: 5px;
+  padding-bottom: 50px;
+  outline:dashed;
+  outline-offset:-10px; 
+  height: 50px;
+  width: 200px;
+  position: relative;
+  background-color: lightbrown;
+  text-align: center;
+}
