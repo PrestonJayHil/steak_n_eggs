@@ -88,7 +88,10 @@ iframe {
   align-items: center;
   margin: auto;
   padding-top: 35px;
-  padding-right: 100px;
+  padding-left: 60px;
+  font-family: "fantasy", papyrus;
+  float: center;
+  color: #d8a170;
 }
 
 .menu-header {
