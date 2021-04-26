@@ -62,11 +62,10 @@ a.active:hover:before {
 {
   text-align: left;
   float: left;
-  font-family: cursive;
+  font-family: "fantasy", papyrus;
   font-size: 24px;
   line-height: 20px;
-  font-style: italic;
-  font-style: bold;
+  font-style: normal;
   color:rgb(179, 122, 76);
   padding: 12px 10px;
 }
