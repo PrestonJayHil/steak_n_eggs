@@ -35,6 +35,11 @@ ReactDOM.render(
         {/* <Route><NotFound /></Route> */}
       </Switch>
       </div>
+
+    <div className="Body">
+      <h2>Welcome to our restaurant!</h2>
+      </div> 
+
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
