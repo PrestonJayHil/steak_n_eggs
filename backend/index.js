@@ -8,6 +8,8 @@ const httpDebug = debug('sne:http');
 const dbDebug = debug('sne:db');
 const { Sequelize, QueryTypes } = require('sequelize');
 const cors = require('cors');
+const jwt = require('express-jwt');
+const jwks = require('jwks-rsa');
 
 const app = express();
 const httpServer = require('http').createServer(app);
@@ -15,6 +17,18 @@ const httpServer = require('http').createServer(app);
 app.use(cors());
 app.use(helmet());
 app.use(express.json());
+
+const validateJWT = jwt({
+    secret: jwks.expressJwtSecret({
+        cache: true,
+        rateLimit: true,
+        jwksRequestsPerMinute: 5,
+        jwksUri: process.env.SNE_AUTH0_JWKS_URI,
+    }),
+    audience: 'http://localhost:8082',
+    issuer: process.env.SNE_AUTH0_ISSUER,
+    algorithms: ['RS256'],
+});
 
 const sequelize = new Sequelize({
     dialect: 'postgres',
@@ -36,6 +50,21 @@ const sequelize = new Sequelize({
         dbDebug(err);
     }
 })();
+
+app.post('/orders', validateJWT, async (req, res) => {
+    dbDebug('/orders');
+    // verify order contents
+    // respond with invoice
+    return res.status(201).json('ok');
+});
+
+app.get('/orders/:id', validateJWT, async (req, res) => {
+    const order_id = req.params.id;
+    dbDebug(`/orders/${order_id}`);
+    // lookup order
+    // check ordered by === req.user.user_id
+    return res.status(200).json('order');
+});
 
 app.get('/menus', async (req, res) => {
     dbDebug('/menus');
