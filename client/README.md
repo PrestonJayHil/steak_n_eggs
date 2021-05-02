@@ -4,6 +4,13 @@ A [React]() based website supported by [Vite](https://vitejs.dev).
 
 ## Setup
 
+Required Environment Variables
+```bash
+# Example .env file
+VITE_AUTH0_DOMAIN=...
+VITE_AUTH0_CLIENT_ID=...
+```
+
 ```bash
 # Install all the client dependencies
 npm install

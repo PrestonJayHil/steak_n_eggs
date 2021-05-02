@@ -20,7 +20,7 @@ cd steak_n_eggs
 **Ensure you have a .env file located in the root of the backend directory**
 
 ```bash
-# Sample .env
+# Sample .env file
 SNE_PORT=...
 SNE_DB_HOST=...
 SNE_DB_PORT=...
@@ -41,8 +41,17 @@ npm run dev
 ```
 
 ### 2. client  
+**Ensure you have a .env file located in the root of the client directory**
+
+```bash
+# Sample .env file
+VITE_AUTH0_DOMAIN=...
+VITE_AUTH0_CLIENT_ID=...
+```
+
 ```bash
 cd client
+
 # Install all the client dependencies
 npm install
 
