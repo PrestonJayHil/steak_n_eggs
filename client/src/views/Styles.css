@@ -1,46 +1,51 @@
 body {
   background-color: rgb(232, 222, 222);
-  background-clip: padding-box;
 }
 
-.Home-header 
-{
-  background-color: transparent;
-  min-height: 100hv;
-  display: block;
-  text-align: center;
-  font-size: 15px;
+.Home-header {
+  display: flex;
+  font-size: 1rem;
   color: rgb(152, 110, 66);
-  border-bottom: 3px solid double;
-  padding: 10px 10px;
-  text-decoration: none;
-  width: 50;
-  
+  padding: 10px;
 }
 
-.Home-header a 
-{
+.Home-nav {
+  flex-grow: 1;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.Nav-link:first-child,
+.Nav-link:last-child {
+  margin-right: auto;
+}
+
+.Nav-link:first-child {
+  color:rgb(152, 110, 66);
+}
+
+.Nav-link:first-child:hover {
+  color: black;
+}
+
+.Nav-link:first-child:before {
+  display: none;
+}
+
+.Nav-link {
+  position: relative;
   font-family: "fantasy", papyrus;
   float: center;
   color: #d8a170;
-  text-align: center;
-  padding: 25px 25px;
   text-decoration: none;
   font-size: 16px;
   position: relative;
   color: rgb(15, 16, 15);
-  top: 17px;
-  padding-top: 8px;
-  padding-bottom: 6px;
-  right: 45px;
+  margin: 0 16px;
 }
 
-a.active
-{
-  position:relative;
-}
-
-a.active:before {
+.Nav-link:before {
   content: "";
   position: absolute;
   width: 100%;
@@ -53,21 +58,9 @@ a.active:before {
   transition: all 0.25s ease-in-out;
 }
 
-a.active:hover:before {
+.Nav-link:hover:before {
   visibility: visible;
   transform: scaleX(1);
-}
-
-.Home-header l
-{
-  text-align: left;
-  float: left;
-  font-family: "fantasy", papyrus;
-  font-size: 24px;
-  line-height: 20px;
-  font-style: normal;
-  color:rgb(179, 122, 76);
-  padding: 12px 10px;
 }
 
 iframe {
@@ -145,4 +138,8 @@ ul.menu-items {
   position: relative;
   background-color: lightbrown;
   text-align: center;
+}
+
+.login-btn {
+  margin-left: 10px;
 }
