@@ -71,12 +71,14 @@ useEffect(() => {
   return (
   <div className="menu-header">
     <h2>Order Online! Pick up in-store!</h2>
-    <select onChange={({ target: { value }}) => { setSelectedMenuId(value); }}>
+    <select
+      defaultValue={selectedMenuId}
+      onChange={({ target: { value }}) => { setSelectedMenuId(value); }}
+    >
       {
         menus.map((menu) => (
           <option
             key={menu.menu_id}
-            selected={selectedMenuId == menu.menu_id}
             value={menu.menu_id}
           >
             {menu.menu_title}
@@ -85,7 +87,7 @@ useEffect(() => {
         ))
       }
     </select>
-    <ul class="menu-items">
+    <ul className="menu-items">
       {
         items[selectedMenuId].map((item) => (
           <li key={item.item_id}>
