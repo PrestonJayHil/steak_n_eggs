@@ -75,9 +75,7 @@ function App() {
         </Auth0Provider>
       </div>
 
-      <div className="Body">
-        <h2>Welcome to our restaurant!</h2>
-      </div>
+
     </BrowserRouter>
   );
 }
