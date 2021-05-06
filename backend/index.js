@@ -11,6 +11,7 @@ const cors = require('cors');
 const jwt = require('express-jwt');
 const jwks = require('jwks-rsa');
 
+const serverPort = process.env.SNE_PORT || 3030;
 const app = express();
 const httpServer = require('http').createServer(app);
 
@@ -25,7 +26,7 @@ const validateJWT = jwt({
         jwksRequestsPerMinute: 5,
         jwksUri: process.env.SNE_AUTH0_JWKS_URI,
     }),
-    audience: 'http://localhost:8082',
+    audience: `http://localhost:${serverPort}`,
     issuer: process.env.SNE_AUTH0_ISSUER,
     algorithms: ['RS256'],
 });
@@ -152,7 +153,6 @@ app.get('/menus/:id', async ({ params: { id } }, res) => {
     }
 });
 
-const serverPort = process.env.SNE_PORT || 3030;
 httpServer.listen(serverPort, () => {
     httpDebug(`Started at localhost:${serverPort}`);
 });
