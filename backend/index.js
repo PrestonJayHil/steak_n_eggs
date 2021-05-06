@@ -6,7 +6,7 @@ const helmet = require('helmet');
 const debug = require('debug');
 const httpDebug = debug('sne:http');
 const dbDebug = debug('sne:db');
-const { Sequelize, QueryTypes } = require('sequelize');
+const { Sequelize, QueryTypes, DataTypes } = require('sequelize');
 const cors = require('cors');
 const jwt = require('express-jwt');
 const jwks = require('jwks-rsa');
@@ -41,6 +41,36 @@ const sequelize = new Sequelize({
     port: process.env.SNE_DB_PORT,
 
     logging: false,
+    define: {
+        freezeTableName: true,
+        timestamps: false,
+        underscored: true,
+    },
+});
+
+const OrderItems = sequelize.define('order_items', {
+    order_id: {
+        primaryKey: true,
+        type: DataTypes.UUID,
+        allowNull: false,
+    },
+    item_id: {
+        primaryKey: true,
+        type: DataTypes.UUID,
+        allowNull: false,
+    },
+    item_price: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    item_quantity: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+            isNumeric: true,
+            min: 1,
+        },
+    },
 });
 
 (async function() {
@@ -53,19 +83,116 @@ const sequelize = new Sequelize({
 })();
 
 app.post('/orders', validateJWT, async (req, res) => {
-    dbDebug('/orders');
-    // verify order contents
-    // respond with invoice
-    return res.status(201).json('ok');
+    dbDebug('post /orders');
+
+    const { user, body } = req;
+    const email = user[`http://localhost:${serverPort}/email`];
+
+    const userOrderEntries = Object.entries(body);
+    if (userOrderEntries.length === 0) {
+        return res.sendStatus(400);
+    }
+
+    let itemIds;
+    const itemPrices = {};
+    try {
+        const items = await sequelize.query(
+            'select item_id, item_price from item',
+            {
+                type: QueryTypes.SELECT,
+                raw: true,
+            },
+        );
+        itemIds = new Set(items.map(({ item_id }) => (item_id)));
+        items.forEach(({ item_id, item_price }) => { itemPrices[item_id] = item_price; });
+    } catch (_) {
+        return res.sendStatus(500);
+    }
+
+    try {
+        const { order_id } = await sequelize.transaction(async (t) => {
+            const [order] = await sequelize.query(
+                'INSERT INTO sne_order (order_author) VALUES (?) RETURNING order_id, order_created',
+                {
+                    plain: true,
+                    raw: true,
+                    type: QueryTypes.INSERT,
+                    replacements: [email],
+                    transaction: t,
+                },
+            );
+            const { order_id, order_created } = order;
+            await OrderItems.bulkCreate(
+                userOrderEntries.map(([item_id, quantity]) => {
+                    if (!itemIds.has(item_id)) {
+                        return false;
+                    }
+                    return {
+                        order_id,
+                        item_id,
+                        item_price: itemPrices[item_id],
+                        item_quantity: quantity,
+                    }
+                }).filter(Boolean),
+                {
+                    validate: true,
+                    transaction: t,
+                },
+            );
+            return { order_id, order_created };
+        });
+
+        return res.status(201).json(order_id);
+    } catch (_) {
+        return res.sendStatus(500);
+    }
 });
 
-app.get('/orders/:id', validateJWT, async (req, res) => {
+const getOrders = async (req, res) => {
     const order_id = req.params.id;
-    dbDebug(`/orders/${order_id}`);
-    // lookup order
-    // check ordered by === req.user.user_id
-    return res.status(200).json('order');
-});
+    const email = req.user[`http://localhost:${serverPort}/email`];
+    try {
+        const orders = await sequelize.query(
+            `select
+                sne_order.order_id,
+                sne_order.order_author,
+                sne_order.order_created,
+                json_agg(json_build_object(
+                    'item_id', item.item_id,
+                    'item_title', item.item_title,
+                    'item_desc', item.item_desc,
+                    'item_quantity', order_items.item_quantity,
+                    'item_price', order_items.item_price
+                )) as items,
+                SUM(item_quantity * order_items.item_price) as total
+            from sne_order join order_items using(order_id) join item using(item_id)
+            where (
+                ${order_id ? `sne_order.order_id = ? and` : ''}
+                sne_order.order_author = ?
+            )
+            group by order_id, order_created
+            order by order_created desc`,
+            {
+                raw: true,
+                type: QueryTypes.SELECT,
+                replacements: order_id ? [order_id, email] : [email],
+            },
+        );
+        return res.status(200).json(orders);
+    } catch (_) {
+        return res.sendStatus(500);
+    }
+}
+
+app.get('/orders', validateJWT, (_, __, next) => {
+    dbDebug('get /orders');
+    next();
+}, getOrders);
+
+app.get('/orders/:id', validateJWT, (req, __, next) => {
+    dbDebug(`get /orders/${req.params.id}`);
+    next();
+}, getOrders);
 
 app.get('/menus', async (req, res) => {
     dbDebug('/menus');
