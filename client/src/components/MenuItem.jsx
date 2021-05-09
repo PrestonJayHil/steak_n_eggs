@@ -5,7 +5,7 @@ export default function MenuItem({ item }) {
     .replaceAll(/\W/g, '')
     .toLowerCase()}.jpg`;
   return (
-      <div>
+      <div class ="menu-font">
         <img src={imgPath} />
         <h2>{item.item_title} {item.item_price}</h2>
         <p>{item.item_desc}</p>
