@@ -4,7 +4,7 @@ import './Styles.css'
 import home from '../assets/jpeg/home.jpg'
 
 function Home() {
-  
+
     const [count, setCount] = useState(0)
 
     return (
@@ -19,9 +19,6 @@ function Home() {
         <p>Welcome to Steak N' Eggs.</p>
         </div>
         <div className="home-context-2">
-        <h1>  </h1>
-        <h1>  </h1>
-        <h1>  </h1>
         <p> Steak N' Eggs restaurant is an all-day</p>
         <p> diner offering delicious breakfast, lunch, and dinner options </p>  
         <p> along with our famous house special, Steak-N-Eggs.</p>
