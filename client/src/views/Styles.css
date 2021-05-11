@@ -147,3 +147,33 @@ ul.menu-items {
 .menu-font {
   font-family: "fantasy", papyrus;
 }
+
+.flex-container {
+  display: flex;
+  
+}
+
+.flex-child {
+  flex: 1;
+  padding-top: 30px;
+  padding-left: 410px;
+  margin-right: 300px;
+}  
+
+.flex-child:first-child {
+  margin-right: -500px;
+} 
+
+
+.home-context-1 {
+  font-family: "Courier New", Courier, monospace;
+  text-align: center;
+  padding-top: 170px;
+  font-size: xx-large;
+}
+
+.home-context-2 {
+  font-family: "Courier New", Courier, monospace;
+  text-align: center;
+  
+}
