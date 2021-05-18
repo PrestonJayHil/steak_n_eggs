@@ -57,16 +57,23 @@ function Checkout() {
 
 // button to remove items from cart
 const handleRemove = (item) => {
-setCheckoutItems(old => [...old, item]) 
-localStorage.setItem("checkoutItems", JSON.stringify(checkoutItems));
-alert(`${item.item_title} added to chekout`)
+  const removeIdx = Array
+                .from(checkoutItems)
+                .findIndex(({ item_id }) => (item_id === item.item_id));
+  if (removeIdx !== -1) {
+    setCheckoutItems(checkoutItems.filter((_, itemIdx) => (itemIdx !== removeIdx)))
+  }
 }
 
 
 // function to calculate totalprice in cart 
-const totalPrice = (checkoutList, item_price) => {
-  
-}
+const totalPrice = checkoutItems.reduce((sum, item) => {
+  const price = parseFloat(item.item_price.replaceAll(/\$/g, ''));
+  if (!(Object.is(price, NaN))) {
+    sum += price;
+  }
+  return sum;
+}, 0);
 
 
 // another function for checkout (checkout should wipe entire cart)
