@@ -197,3 +197,19 @@ ul.menu-items {
   padding-bottom: 10px;
   padding-top: 10px;
 }
+
+/*contact us*/
+.contact-context-1 {
+  font-size: x-large;
+  font-weight: bolder;
+  text-align: left;
+  margin-left: 120px;
+  margin-right: auto;
+}
+
+/*contact us*/
+.contact-context-2 {
+  text-align: left;
+  margin-left: 120px;
+  margin-right: auto;
+}
