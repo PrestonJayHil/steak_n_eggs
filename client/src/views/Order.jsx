@@ -1,4 +1,3 @@
-import { useAuth0 } from '@auth0/auth0-react';
 import React, { useEffect, useState } from 'react'
 // import logo from '../assets/svg/logo.svg'
 
@@ -8,10 +7,6 @@ import './Styles.css'
 
 
 function Order() {
-
-
-
-  const { isAuthenticated, getAccessTokenSilently } = useAuth0();
   const [count, setCount] = useState(0)
 
   const [menus, setMenu] = useState([]);
@@ -35,48 +30,6 @@ useEffect(() => {
        localStorage.setItem("checkoutItems", JSON.stringify(checkoutItems));
        alert(`${item.item_title} added to chekout`)
   }
-
-  const checkout = async () => {
-    if (!isAuthenticated) {
-      // TODO: redirect to login or signup?
-      // history.push()
-      return;
-    }
-
-    try {
-      const body = JSON.stringify(checkoutItems.reduce((acc, item) => {
-        const { item_id } = item;
-        if (!acc[item_id]) {
-          acc[item_id] = 1;
-        } else {
-          acc[item_id] += 1;
-        }
-        return acc;
-      }, {}));
-      const token = await getAccessTokenSilently({
-        audience: 'http://localhost:8082'
-      });
-      const req = new Request('http://localhost:8082/orders', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
-        method: 'POST',
-        body,
-      });
-      const resp = await fetch(req);
-      if (resp.ok) {
-        setCheckoutItems([]);
-        // TODO: implement order page (blocked by API)
-        // const { order_id } = await resp.json();
-        // history.pushState(`/orders/${order_id}`);
-      }
-    } catch (e) {
-      if (import.meta.env.DEV) {
-        console.log(e);
-      }
-    }
-  };
 
   useEffect(() => {
     setLoading(true);
@@ -141,9 +94,6 @@ useEffect(() => {
         ))
       }
     </ul>
-    <button onClick={checkout}>
-      Checkout
-    </button>
   </div>
   )
 }
