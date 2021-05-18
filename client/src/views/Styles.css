@@ -1,12 +1,12 @@
 body {
-  background-color: rgb(232, 222, 222);
+  background-color: rgb(240, 154, 26);
 }
 
 .Home-header {
   display: flex;
   font-size: 1rem;
-  color: rgb(152, 110, 66);
-  padding: 10px;
+  color: rgb(197, 97, 31);
+  padding: 20px;
 }
 
 .Home-nav {
@@ -39,7 +39,7 @@ body {
   float: center;
   color: #d8a170;
   text-decoration: none;
-  font-size: 16px;
+  font-size: 20px;
   position: relative;
   color: rgb(15, 16, 15);
   margin: 0 16px;
@@ -69,7 +69,7 @@ iframe {
   top: 50px;
   padding-top: 50px;
   padding-bottom: 6px;
-  padding-right: 110px;
+  padding-right: 100px;
   
 }
 
@@ -80,7 +80,7 @@ iframe {
   align-items: center;
   margin: auto;
   padding-top: 35px;
-  padding-left: 60px;
+  padding-left: 10px;
   font-family: "fantasy", papyrus;
   float: center;
   color: #d8a170;
@@ -146,6 +146,7 @@ ul.menu-items {
 
 .menu-font {
   font-family: "fantasy", papyrus;
+  text-align: "justify";
 }
 
 .flex-container {
@@ -153,26 +154,46 @@ ul.menu-items {
   
 }
 
+/*home image*/
 .flex-child {
   flex: 1;
   padding-top: 30px;
-  padding-left: 410px;
-  margin-right: 300px;
+  padding-left: 80px;
+  margin-right: 70px;
+  margin-left: 100px;
 }  
 
 .flex-child:first-child {
   margin-right: -500px;
 } 
 
+/*steak n eggs*/
 .home-context-1 {
   font-family: "Courier New", Courier, monospace;
-  text-align: center;
-  padding-top: 170px;
-  font-size: xx-large;
+  text-align: right;
+  padding-top: 120px;
+  margin-right: 280px;
+  font-size: xxx-large;
 }
 
+/*order online now*/
 .home-context-2 {
   font-family: "Courier New", Courier, monospace;
-  text-align: center;
-  
+  text-align: left;
+  margin-left: 100px;
+  margin-right: 50;
+  font-size: x-large;
+  padding-bottom: 10px;
+  padding-left: 50px;
+}
+
+/*home intro*/
+.home-context-3 {
+  font-family: "Courier New", Courier, monospace;
+  text-align: left;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: large;
+  padding-bottom: 10px;
+  padding-top: 10px;
 }
