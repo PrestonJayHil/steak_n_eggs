@@ -71,6 +71,14 @@ const OrderItems = sequelize.define('order_items', {
             min: 1,
         },
     },
+    item_points_used: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+            isNumeric: true,
+            min: 0,
+        }
+    }
 });
 
 (async function() {
@@ -132,6 +140,7 @@ app.post('/orders', validateJWT, async (req, res) => {
                         item_id,
                         item_price: itemPrices[item_id],
                         item_quantity: quantity,
+                        item_points_used: 0,
                     }
                 }).filter(Boolean),
                 {
@@ -162,7 +171,8 @@ const getOrders = async (req, res) => {
                     'item_title', item.item_title,
                     'item_desc', item.item_desc,
                     'item_quantity', order_items.item_quantity,
-                    'item_price', order_items.item_price
+                    'item_price', order_items.item_price,
+                    'item_points', order_items.item_points
                 )) as items,
                 SUM(item_quantity * order_items.item_price) as total
             from sne_order join order_items using(order_id) join item using(item_id)
