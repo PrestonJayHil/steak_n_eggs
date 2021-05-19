@@ -83,7 +83,8 @@ iframe {
   padding-left: 10px;
   font-family: "fantasy", papyrus;
   float: center;
-  color: #d8a170;
+  color: #f55d42;
+  text-decoration: underline;
 }
 
 .menu-header {
